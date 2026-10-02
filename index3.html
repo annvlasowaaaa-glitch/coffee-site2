@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coffee</title>
+    <style>
+        :root {
+            --bg: #fdf6ec;
+            --text: #333;
+            --heading: #4b2e1e;
+            --heading2: #6b3e26;
+            --accent: #a9744f;
+            --block-bg: #f4e6d4;
+            --block-text: #5a4632;
+        }
+
+        body.dark {
+            --bg: #1e1a17;
+            --text: #e8ddd0;
+            --heading: #f0c9a0;
+            --heading2: #e0b483;
+            --accent: #c8935e;
+            --block-bg: #2c2521;
+            --block-text: #d4c3b0;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: var(--heading);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            transition: color 0.4s, border-color 0.4s;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: var(--heading2);
+            margin-top: 30px;
+            transition: color 0.4s;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--accent);
+            margin: 20px 0;
+            padding: 15px 20px;
+            color: var(--block-text);
+            font-style: italic;
+            background-color: var(--block-bg);
+            border-radius: 5px;
+            transition: background-color 0.4s, color 0.4s, border-color 0.4s;
+        }
+
+        p { text-align: justify; }
+
+        ul {
+            background-color: var(--block-bg);
+            padding: 15px 40px;
+            border-radius: 5px;
+            transition: background-color 0.4s;
+        }
+
+        li { margin-bottom: 8px; }
+
+        /* === Интерактив === */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .clock {
+            font-size: 0.95em;
+            color: var(--heading2);
+            font-family: 'Courier New', monospace;
+        }
+
+        button {
+            font-family: inherit;
+            font-size: 0.95em;
+            padding: 8px 16px;
+            border: 2px solid var(--accent);
+            background: transparent;
+            color: var(--heading2);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        button:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .coffee-counter {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: var(--block-bg);
+            border-radius: 10px;
+            transition: background-color 0.4s;
+        }
+
+        .coffee-counter .count {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--heading);
+            display: block;
+            margin: 10px 0;
+            transition: transform 0.2s;
+        }
+
+        .coffee-counter .count.pop {
+            transform: scale(1.3);
+        }
+
+        .fact-box {
+            background: var(--block-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-style: italic;
+            color: var(--block-text);
+            transition: background-color 0.4s, color 0.4s;
+            opacity: 1;
+        }
+
+        .fact-box.fade {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Анимация появления разделов */
+        h2, p, ul, blockquote {
+            animation: fadeIn 0.6s ease both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <span class="clock" id="clock">--:--:--</span>
+        <button id="themeBtn">🌙 Ночная тема</button>
+    </div>
+
+    <h1>Кофе</h1>
+
+    <blockquote>
+        <p>«Кофе — это не просто напиток, это ритуал, который сопровождает нас каждое утро.»</p>
+        <p>«Хороший кофе согревает не только тело, но и душу.»</p>
+    </blockquote>
+
+    <h2>Что такое кофе?</h2>
+    <p>
+        Кофе — это напиток, приготовляемый из обжаренных и молотых зёрен кофейного дерева. 
+        Родиной кофе считается Эфиопия, где, по легенде, пастух Калди заметил, что его козы 
+        становятся бодрыми, поев ягод с незнакомого куста. С тех пор кофе прошёл долгий путь 
+        и стал одним из самых популярных напитков в мире.
+    </p>
+
+    <h2>Основные виды кофе</h2>
+    <ul>
+        <li><strong>Эспрессо</strong> — концентрированный напиток, основа большинства видов кофе.</li>
+        <li><strong>Американо</strong> — эспрессо, разбавленный горячей водой.</li>
+        <li><strong>Капучино</strong> — эспрессо с молоком и плотной молочной пенкой.</li>
+        <li><strong>Латте</strong> — мягкий напиток с большим количеством молока.</li>
+        <li><strong>Раф</strong> — кофе со сливками и ванильным сахаром.</li>
+        <li><strong>Мокко</strong> — кофе с добавлением шоколада.</li>
+    </ul>
+
+    <h2>Как правильно заваривать кофе?</h2>
+    <p>
+        Для приготовления вкусного кофе важно соблюдать несколько простых правил: использовать 
+        свежеобжаренные зёрна, правильно их смолоть и не допускать кипения воды. Идеальная 
+        температура воды — около 90–96 °C. Также важно соблюдать пропорции: обычно берут 
+        1–2 чайные ложки молотого кофе на 200 мл воды.
+    </p>
+
+    <!-- Счётчик чашек -->
+    <h2>Сколько чашек вы уже выпили сегодня?</h2>
+    <div class="coffee-counter">
+        <span class="count" id="count">0</span>
+        <button id="drinkBtn">☕ Выпить чашку</button>
+        <button id="resetBtn">Сбросить</button>
+    </div>
+
+    <!-- Случайный факт -->
+    <h2>Случайный факт о кофе</h2>
+    <div class="fact-box" id="factBox">Нажмите кнопку, чтобы узнать интересный факт ☕</div>
+    <div style="text-align:center;">
+        <button id="factBtn">🎲 Показать факт</button>
+    </div>
+
+    <h2>Польза и вред кофе</h2>
+    <p>
+        Умеренное употребление кофе (1–3 чашки в день) может улучшить концентрацию внимания, 
+        повысить работоспособность и даже снизить риск некоторых заболеваний. Однако избыток 
+        кофеина способен вызвать бессонницу, повышенное давление и раздражительность. 
+        Поэтому важно знать свою норму.
+    </p>
+
+    <h2>Интересные факты о кофе</h2>
+    <ul>
+        <li>Кофе — второй по популярности напиток в мире после воды.</li>
+        <li>В Финляндии пьют больше всего кофе на душу населения.</li>
+        <li>Существует более 100 видов кофейных деревьев, но массово используют только два: арабику и робусту.</li>
+        <li>Самый дорогой кофе в мире — «Копи Лювак».</li>
+    </ul>
+
+    <hr>
+    <p style="text-align: center; color: var(--accent); font-size: 0.9em;">
+        Страница создана в рамках лабораторной работы №1
+    </p>
+
+    <script>
+        // === 1. Часы ===
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `🕐 ${h}:${m}:${s}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // === 2. Смена темы ===
+        const themeBtn = document.getElementById('themeBtn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            themeBtn.textContent = isDark ? '☀️ Дневная тема' : '🌙 Ночная тема';
+        });
+
+        // === 3. Счётчик чашек ===
+        let count = 0;
+        const countEl = document.getElementById('count');
+        document.getElementById('drinkBtn').addEventListener('click', () => {
+            count++;
+            countEl.textContent = count;
+            countEl.classList.add('pop');
+            setTimeout(() => countEl.classList.remove('pop'), 200);
+        });
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            count = 0;
+            countEl.textContent = 0;
+        });
+
+        // === 4. Случайный факт ===
+        const facts = [
+            'Кофе был открыт благодаря козам — пастух Калди заметил их бодрость после поедания ягод.',
+            'В Турции в XV веке за отказ подать кофе муж мог подать на развод.',
+            'Эспрессо содержит меньше кофеина на чашку, чем фильтр-кофе.',
+            'Бетховен был большим любителем кофе и всегда заваривал ровно 60 зёрен.',
+            'Кофеин начинает действовать через 15–20 минут после употребления.',
+            'В Японии есть кофейни, где кофе наливают роботы.',
+            'Самая большая чашка кофе в мире была объёмом более 3 000 литров.'
+        ];
+        const factBox = document.getElementById('factBox');
+        document.getElementById('factBtn').addEventListener('click', () => {
+            factBox.classList.add('fade');
+            setTimeout(() => {
+                const random = facts[Math.floor(Math.random() * facts.length)];
+                factBox.textContent = random;
+                factBox.classList.remove('fade');
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
